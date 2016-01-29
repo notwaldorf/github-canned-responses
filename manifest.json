@@ -1,17 +1,17 @@
 {
   "manifest_version": 2,
 
-  "name" : "Canned Github response",
-  "description" : "Choose from a set of canned responses for your Github PRs or issues",
+  "name" : "Github Canned Responses",
+  "description" : "Choose from a set of canned responses when commenting on your Github PRs or issues",
   "version" : "1.0.0",
-
+  "icons": {
+   "128": "logo.png"
+  },
   "permissions": [
     "activeTab",
     "storage"
   ],
-
   "options_page": "options.html",
-
   "content_scripts": [
     {
       "js": [
@@ -20,7 +20,6 @@
       "matches": ["*://github.com/*"]
     }
   ],
-
   "background": {
     "scripts": ["background.js"]
   }
