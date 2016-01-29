@@ -5,6 +5,7 @@ var list = document.getElementById('answerList');
 updateAnswersList();
 
 function updateAnswersList() {
+  list.innerHTML = '';
   for (var i = 0; i < answers.length; i++ ) {
     var li = createItem(answers[i].name, answers[i].description);
     li.answerId = i;
@@ -54,11 +55,13 @@ document.querySelector('.list').addEventListener('click', function(event) {
   var item = button.parentNode;
   var title = item.querySelector('.answer-title');
   var text = item.querySelector('.answer-text');
+
+  // This is pretty lame.
   if (button.textContent.toLowerCase() === 'edit') {
     title.disabled = text.disabled = false;
     button.textContent = 'Save';
     title.focus();
-  } else {
+  } else if (button.textContent.toLowerCase() === 'save') {
     title.disabled = text.disabled = true;
     button.textContent = 'Edit';
 
@@ -69,6 +72,11 @@ document.querySelector('.list').addEventListener('click', function(event) {
 
     // Save to local storage.
     localStorage.setItem(localStorageKey, JSON.stringify(answers));
+  } else if (button.textContent.toLowerCase() === 'delete') {
+    answers.splice(item.answerId, 1);
+    // Save to local storage.
+    localStorage.setItem(localStorageKey, JSON.stringify(answers));
+    updateAnswersList();
   }
 });
 
@@ -85,12 +93,17 @@ function createItem(name, text) {
   desc.textContent = text;
   desc.disabled = true;
 
-  var button = document.createElement('button');
-  button.className = 'edit';
-  button.textContent = 'Edit';
+  var edit = document.createElement('button');
+  edit.className = 'edit';
+  edit.textContent = 'Edit';
+
+  var del = document.createElement('button');
+  del.className = 'del';
+  del.textContent = 'Delete';
 
   li.appendChild(title);
   li.appendChild(desc);
-  li.appendChild(button);
+  li.appendChild(edit);
+  li.appendChild(del);
   return li;
 }
