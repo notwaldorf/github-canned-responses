@@ -109,6 +109,7 @@
     var item = event.target;
     var textarea = item.toolbar.parentNode.parentNode.querySelector('textarea');
     textarea.value += '\n' + '**Automatic response:** ' + item.answer + '\n';
+    
     // Scroll down.
     textarea.scrollTop = textarea.scrollHeight;
   }

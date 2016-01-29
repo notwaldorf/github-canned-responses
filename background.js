@@ -38,7 +38,7 @@ var defaultAnswers = [
 ];
 
 function getAnswersListFromStorage() {
-  // Load the answers.
+  // Load the answers from local storage.
   var localStorageKey = '__GH_CANNED_ANSWERS__EXT__';
   var saved = localStorage.getItem(localStorageKey);
   var answers;

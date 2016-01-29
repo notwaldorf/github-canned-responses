@@ -17,24 +17,33 @@ document.querySelector('#new').addEventListener('click', function(event) {
   var text = document.getElementById('newText').value;
 
   if (name.trim() === '' || text.trim() === '') {
+    document.querySelector('#newConfirm').hidden = true;
     document.querySelector('#newError').hidden = false;
     return;
   }
 
+  document.querySelector('#newConfirm').hidden = true;
   document.querySelector('#newError').hidden = true;
+
   var answerId = answers.length;
   answers.push({name: name, description: text});
 
   // Save to local storage.
   localStorage.setItem(localStorageKey, JSON.stringify(answers));
 
-  // Add to the UI list
+  // Add to the UI list.
   var li = createItem(name, text);
   li.answerId = answerId;
   list.appendChild(li);
 
-  // Scroll it in view.
-  document.scrollTop = document.scrollHeight;
+  document.querySelector('#newConfirm').hidden = false;
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newText').value = '';
+
+  // Clear it after a bit.
+  setTimeout(function() {
+    document.querySelector('#newConfirm').hidden = true;
+  }, 2000);
 });
 
 document.querySelector('.list').addEventListener('click', function(event) {
