@@ -82,7 +82,7 @@
 
   function createDropdown(answers, toolbar) {
     // This should use the fuzzy search instead (see labels)
-    var outer = createNodeWithClass('div', 'select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container');
+    var outer = createNodeWithClass('div', 'select-menu-modal-holder js-menu-content js-navigation-container');
     var inner = createNodeWithClass('div', 'select-menu-modal');
     outer.appendChild(inner);
 
