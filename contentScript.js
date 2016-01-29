@@ -118,7 +118,7 @@
       itemList.appendChild(item);
       item.toolbar = toolbar;
       item.answer = answers[i].description;
-      $(item).on('selectmenu:selected', insertAnswer);
+      item.addEventListener('click', insertAnswer);
     }
 
     return outer;
