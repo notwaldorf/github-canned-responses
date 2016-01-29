@@ -43,17 +43,18 @@
       var target = createNodeWithClass('div', 'toolbar-group');
       targets[i].insertBefore(target, targets[i].childNodes[0]);
 
-      var item = createNodeWithClass('div', 'toolbar-item dropdown js-menu-container');
+      var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu');
+      item.setAttribute('data-contents-url', '/notwaldorf/fuckery/issues/1/show_partial?partial=issues%2Fsidebar%2Flabels_menu_content')
       target.appendChild(item);
 
       var button = createButton();
       item.appendChild(button);
 
-      var dropdown = createDropdown(answers, targets[i]);
-      item.appendChild(dropdown);
+      if (targets[i]) {
+        var dropdown = createDropdown(answers, targets[i]);
+        item.appendChild(dropdown);
+      }
     }
-
-    document.querySelector('#new_comment_field').value = "zomg update";
   }
 
   function createNodeWithClass(nodeType, className) {
@@ -63,13 +64,16 @@
   }
 
   function createButton() {
-    var button = createNodeWithClass('button', 'js-menu-target menu-target tooltipped tooltipped-n');
+    var button = createNodeWithClass('button', 'toolbar-item tooltipped tooltipped-n js-menu-target menu-target');
 
     button.setAttribute('aria-label', 'Insert canned response');
     button.style.display = 'inline-block';
 
-    var text = document.createTextNode('Canned Response');
-    button.appendChild(text);
+    //var text = document.createTextNode('Canned Response');
+    //button.appendChild(text);
+
+    var span = createNodeWithClass('span', 'octicon octicon-mail-read');
+    button.appendChild(span);
 
     var span = createNodeWithClass('span', 'dropdown-caret');
     button.appendChild(span);
@@ -79,14 +83,40 @@
 
   function createDropdown(answers, toolbar) {
     // This should use the fuzzy search instead (see labels)
-    var outer = createNodeWithClass('div', 'dropdown-menu-content js-menu-content');
-    var inner = createNodeWithClass('ul', 'dropdown-menu dropdown-menu-s');
-    inner.style.width = '200px';
+    var outer = createNodeWithClass('div', 'select-menu-modal-holder js-menu-content js-navigation-container js-active-navigation-container');
+    var inner = createNodeWithClass('div', 'select-menu-modal');
     outer.appendChild(inner);
+
+    var header = createNodeWithClass('div', 'select-menu-header');
+    var headerText = createNodeWithClass('span', 'select-menu-title');
+    headerText.innerHTML = 'Insert response';
+    header.appendChild(headerText);
+    inner.appendChild(header);
+
+    var main = createNodeWithClass('div', 'js-select-menu-deferred-content');
+    inner.appendChild(main);
+
+    var filter = createNodeWithClass('div', 'select-menu-filters');
+    var filterText = createNodeWithClass('div', 'select-menu-text-filter');
+    var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable');
+    filterInput.id = 'canned-answer-filter-field';
+    filterInput.placeholder = 'Filter answers';
+    filterInput.autocomplete = 'off';
+    filterInput.setAttribute('aria-label', 'Type or choose an answer');
+
+    filterText.appendChild(filterInput);
+    filter.appendChild(filterText);
+    main.appendChild(filter);
+
+    var itemList = createNodeWithClass('div', 'select-menu-list');
+    itemList.setAttribute('date-filterable-for', 'canned-answer-filter-field');
+    itemList.setAttribute('date-filterable-type', 'substring');
+
+    main.appendChild(itemList);
 
     for (var i = 0; i < answers.length; i++) {
       var item = createDropdownItem(answers[i].name);
-      inner.appendChild(item);
+      itemList.appendChild(item);
       item.toolbar = toolbar;
       item.answer = answers[i].description;
       item.addEventListener('click', insertAnswer);
@@ -96,11 +126,7 @@
   }
 
   function createDropdownItem(text) {
-    var item = createNodeWithClass('a', 'dropdown-item');
-    item.style.cursor = 'pointer';
-    item.style.fontWeight = 'normal';
-    item.style.lineHeight = 'inherit';
-    item.style.padding = '4px 10px 4px 15px';
+    var item = createNodeWithClass('div', 'select-menu-item js-navigation-item navigation-focus');
     item.textContent = text;
     return item;
   }
@@ -108,8 +134,8 @@
   function insertAnswer(event) {
     var item = event.target;
     var textarea = item.toolbar.parentNode.parentNode.querySelector('textarea');
-    textarea.value += '\n' + '**Automatic response:** ' + item.answer + '\n';
-    
+    textarea.value += item.answer + '\n';
+
     // Scroll down.
     textarea.scrollTop = textarea.scrollHeight;
   }
