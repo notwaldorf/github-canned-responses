@@ -11,7 +11,8 @@ canned responses.
 ![view of extension in action](https://cloud.githubusercontent.com/assets/1369170/12687384/7f0217d0-c684-11e5-94a2-9ffe80d6dc62.png>
 )
 
-It comes with a few default canned responses, but you can edit them and add your own!
+It comes with a few default canned responses, but you can edit them and add your own! (To do so,
+  go to chrome://extensions, and click on the "Options" link for the extension)
 
 ![view of answer editing page](https://cloud.githubusercontent.com/assets/1369170/12687433/c53c80e6-c684-11e5-8ec0-d915e5457ca2.png>
 )
