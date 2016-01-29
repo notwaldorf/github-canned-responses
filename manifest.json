@@ -8,8 +8,7 @@
    "128": "logo.png"
   },
   "permissions": [
-    "activeTab",
-    "storage"
+    "activeTab"
   ],
   "options_page": "options.html",
   "content_scripts": [
