@@ -97,7 +97,7 @@
 
     var filter = createNodeWithClass('div', 'select-menu-filters');
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
-    var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable');
+    var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable form-control');
     filterInput.id = 'canned-response-filter-field';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
