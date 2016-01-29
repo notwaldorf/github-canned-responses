@@ -1,32 +1,41 @@
 var answers = getAnswersListFromStorage();
+var localStorageKey = '__GH_CANNED_ANSWERS__EXT__';
+var list = document.getElementById('answerList');
+
 updateAnswersList();
 
 function updateAnswersList() {
-  var list = document.getElementById('answerList');
   for (var i = 0; i < answers.length; i++ ) {
-    var li = document.createElement('li');
+    var li = createItem(answers[i].name, answers[i].description);
     li.answerId = i;
     list.appendChild(li);
-
-    var title = document.createElement('input');
-    title.className = 'answer-title single-line';
-    title.value = answers[i].name;
-    title.disabled = true;
-
-    var desc = document.createElement('textarea');
-    desc.className = 'answer-text';
-    desc.textContent = answers[i].description;
-    desc.disabled = true;
-
-    var button = document.createElement('button');
-    button.className = 'edit';
-    button.textContent = 'Edit';
-
-    li.appendChild(title);
-    li.appendChild(desc);
-    li.appendChild(button);
   }
 }
+
+document.querySelector('#new').addEventListener('click', function(event) {
+  var name = document.getElementById('newTitle').value;
+  var text = document.getElementById('newText').value;
+
+  if (name.trim() === '' || text.trim() === '') {
+    document.querySelector('#newError').hidden = false;
+    return;
+  }
+
+  document.querySelector('#newError').hidden = true;
+  var answerId = answers.length;
+  answers.push({name: name, description: text});
+
+  // Save to local storage.
+  localStorage.setItem(localStorageKey, JSON.stringify(answers));
+
+  // Add to the UI list
+  var li = createItem(name, text);
+  li.answerId = answerId;
+  list.appendChild(li);
+
+  // Scroll it in view.
+  document.scrollTop = document.scrollHeight;
+});
 
 document.querySelector('.list').addEventListener('click', function(event) {
   if (event.target.tagName.toLowerCase() !== 'button')
@@ -47,10 +56,32 @@ document.querySelector('.list').addEventListener('click', function(event) {
     // Save locally.
     var answerId = item.answerId;
     answers[item.answerId].name = title.value;
-    answers[item.answerId].desc = text.value;
+    answers[item.answerId].description = text.value;
 
     // Save to local storage.
-    var localStorageKey = '__GH_CANNED_ANSWERS__EXT__';
     localStorage.setItem(localStorageKey, JSON.stringify(answers));
   }
 });
+
+function createItem(name, text) {
+  var li = document.createElement('li');
+
+  var title = document.createElement('input');
+  title.className = 'answer-title single-line';
+  title.value = name;
+  title.disabled = true;
+
+  var desc = document.createElement('textarea');
+  desc.className = 'answer-text';
+  desc.textContent = text;
+  desc.disabled = true;
+
+  var button = document.createElement('button');
+  button.className = 'edit';
+  button.textContent = 'Edit';
+
+  li.appendChild(title);
+  li.appendChild(desc);
+  li.appendChild(button);
+  return li;
+}
