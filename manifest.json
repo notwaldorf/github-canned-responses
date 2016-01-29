@@ -15,9 +15,13 @@
   "content_scripts": [
     {
       "js": [
-        "response.js"
+        "contentScript.js"
       ],
       "matches": ["*://github.com/*"]
     }
-  ]
+  ],
+
+  "background": {
+    "scripts": ["background.js"]
+  }
 }
