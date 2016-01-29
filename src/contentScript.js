@@ -2,7 +2,8 @@
   "use strict";
   var answers;
 
-  // Thanks https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
+  // This following code is taken from
+  // https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
   var allowedPaths = [
     // New issues
     /github.com\/[\w\-]+\/[\w\-]+\/issues\/new/,
@@ -14,10 +15,50 @@
     /github.com\/[\w\-]+\/[\w\-]+\/pull\/\d+/
   ];
 
-  chrome.runtime.sendMessage('load', function(response) {
-    answers = response.answers;
-    addAnswerButton();
+  // Inject the code from fn into the page, in an IIFE.
+  function inject(fn) {
+    var script = document.createElement('script');
+    var parent = document.documentElement;
+    script.textContent = '('+ fn +')();';
+    parent.appendChild(script);
+    parent.removeChild(script);
+  }
+
+  // Post a message whenever history.pushState is called. GitHub uses
+  // pushState to implement page transitions without full page loads.
+  // This needs to be injected because content scripts run in a sandbox.
+  inject(function() {
+    var pushState = history.pushState;
+    history.pushState = function on_pushState() {
+      window.postMessage('extension:pageUpdated', '*');
+      return pushState.apply(this, arguments);
+    };
+    var replaceState = history.replaceState;
+    history.replaceState = function on_replaceState() {
+      window.postMessage('extension:pageUpdated', '*');
+      return replaceState.apply(this, arguments);
+    };
   });
+
+  // Do something when the extension is loaded into the page,
+  // and whenever we push/pop new pages.
+  window.addEventListener("message", function(event) {
+    if (event.data === 'extension:pageUpdated') {
+      load();
+    }
+  });
+
+  window.addEventListener("popstate", load);
+  load();
+
+  // End of code from https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
+
+  function load() {
+    chrome.runtime.sendMessage('load', function(response) {
+      answers = response.answers;
+      addAnswerButton();
+    });
+  }
 
   function any(array, predicate) {
     for (var i = 0; i < array.length; i++) {
@@ -34,13 +75,19 @@
       return;
     }
 
+    // If there's already a button nuke it so we can start fresh.
+    var b = document.querySelector('.github-canned-response-item');
+    if (b) {
+      b.parentNode.removeChild(b);
+    }
+
     var targets = document.querySelectorAll('.js-toolbar.toolbar-commenting');
 
     for (var i = 0; i < targets.length; i++) {
       var target = createNodeWithClass('div', 'toolbar-group');
       targets[i].insertBefore(target, targets[i].childNodes[0]);
 
-      var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu');
+      var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu github-canned-response-item');
       target.appendChild(item);
 
       var button = createButton();
