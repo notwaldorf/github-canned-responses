@@ -6,7 +6,8 @@
   "version" : "1.0.0",
 
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
 
   "options_page": "options.html",

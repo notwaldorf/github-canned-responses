@@ -52,6 +52,7 @@
     }
   ];
 
+  debugger
   var localStorageKey = '__GH_CANNED_ANSWERS__EXT__';
   var saved = localStorage.getItem(localStorageKey);
   var answers;
@@ -109,10 +110,11 @@
 
   function createButton() {
     var button = createNodeWithClass('button', 'js-menu-target menu-target tooltipped tooltipped-n');
-    button.setAttribute('aria-label', 'Insert canned answer');
+
+    button.setAttribute('aria-label', 'Insert canned response');
     button.style.display = 'inline-block';
 
-    var text = document.createTextNode('Canned Answer');
+    var text = document.createTextNode('Canned Response');
     button.appendChild(text);
 
     var span = createNodeWithClass('span', 'dropdown-caret');
@@ -122,6 +124,7 @@
   }
 
   function createDropdown(answers, toolbar) {
+    // This should use the fuzzy search instead (see labels)
     var outer = createNodeWithClass('div', 'dropdown-menu-content js-menu-content');
     var inner = createNodeWithClass('ul', 'dropdown-menu dropdown-menu-s');
     inner.style.width = '200px';
@@ -152,5 +155,7 @@
     var item = event.target;
     var textarea = item.toolbar.parentNode.parentNode.querySelector('textarea');
     textarea.value += '\n' + '**Automatic response:** ' + item.answer + '\n';
+    // Scroll down.
+    textarea.scrollTop = textarea.scrollHeight;
   }
 })();

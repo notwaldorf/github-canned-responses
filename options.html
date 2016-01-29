@@ -1,11 +1,104 @@
 <!doctype html>
-<html data-ng-app="gApp" ng-csp="">
+<html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <title>Hi</title>
-</head>
-<body key-trap>
-Your templates should go here. WAIT FOR IT.
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>Canned GitHub Answers</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <style>
+    body {
+      font-family: 'Lato';
+      font-size: 14px;
+      background: #eee;
+      margin: 0;
+      padding: 0;
+      overflow: auto;
+    }
 
+    .uppercase { text-transform: uppercase; }
+    .wide { letter-spacing: 1px; }
+    .thin { font-weight: 300; }
+    .heavy { font-weight: bold; }
+    .line {
+      background: #E91E63;
+      height: 10px;
+    }
+    ul { padding: 0; list-style-type: none; }
+    li {
+      margin-bottom: 30px;
+    }
+    .list {
+      max-width: 600px;
+      margin: 50px auto;
+    }
+
+    .answer-title {
+      color: #2D243B;
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 0px;
+      word-wrap: break-word;
+    }
+
+    .answer-text {
+      font-size: 19px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    button {
+      font-size: 15px;
+      font-weight: 300;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      text-align: center;
+      background-color: #E91E63;
+      color: white;
+      border-radius: 2px;
+      text-transform: uppercase;
+      vertical-align: middle;
+      letter-spacing: 1px;
+      display: inline-block;
+      padding: 5px 10px;
+      margin-bottom: 15px;
+    }
+
+    button:hover {
+      background: #C51162;
+    }
+
+    textarea, input {
+      display: block;
+      width: 100%;
+      position: relative;
+      -webkit-appearance: none;
+      border: 1px solid #ccc;
+      padding: 0 5px;
+    }
+
+    textarea[disabled], input[disabled] {
+      border: none;
+      resize: none;
+      padding: 1px 6px;
+      background: transparent;
+    }
+
+    textarea {
+      margin: 10px 0;
+      font-family: inherit;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="line"></div>
+
+  <div class="list">
+    <ul id="answerList">
+    </ul>
+  </div>
+
+  <div class="line"></div>
+  <script src="options.js"></script>
 </body>
 </html>
