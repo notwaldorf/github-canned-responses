@@ -125,7 +125,7 @@
   }
 
   function createDropdownItem(text) {
-    var item = createNodeWithClass('div', 'select-menu-item js-navigation-item navigation-focus');
+    var item = createNodeWithClass('div', 'select-menu-item js-navigation-item');
     item.textContent = text;
     return item;
   }
