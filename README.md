@@ -2,7 +2,7 @@
 
 Sometimes you've made mistakes and you have to triage 700 GitHub issues and Pull Requests. A lot of them will need the same answer, and your wrists will start hurting from all the switch-to-edit-copy-pasting. This extension helps with that.
 
-[Install it from the Chrome Web Store]()!
+[Install it from the Chrome Web Store](https://chrome.google.com/webstore/detail/github-canned-responses/lhehmppafakahahobaibfcomknkhoina)!
 
 The extension adds a little "canned response" button inside the
 comment editing view, that allows you to filter through existing
