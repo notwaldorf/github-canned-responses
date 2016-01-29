@@ -28,12 +28,8 @@ var defaultAnswers = [
     description: "Thanks for your contribution! We'll triage and take a look at it as soon as possible!"
   },
   {
-    name: 'PR: against MD spec',
-    description: "Thanks for your thoughtful contribution! Unfortunately, this is against the Material Design spec, and we can't accept it at this time."
-  },
-  {
     name: 'PR: needs test',
-    description: "Please add a test case that tests the problem this PR is fixing"
+    description: "Please add a test case that tests the problem this PR is fixing."
   }
 ];
 

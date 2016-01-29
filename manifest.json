@@ -3,7 +3,7 @@
 
   "name" : "GitHub Canned Responses",
   "description" : "Choose from a set of canned responses when commenting on your GitHub PRs or issues",
-  "version" : "1.0.3",
+  "version" : "1.0.4",
   "icons": {
    "128": "logo.png"
   },
