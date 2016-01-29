@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name" : "Github Canned Responses",
-  "description" : "Choose from a set of canned responses when commenting on your Github PRs or issues",
-  "version" : "1.0.0",
+  "name" : "GitHub Canned Responses",
+  "description" : "Choose from a set of canned responses when commenting on your GitHub PRs or issues",
+  "version" : "1.0.3",
   "icons": {
    "128": "logo.png"
   },
