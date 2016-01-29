@@ -44,7 +44,6 @@
       targets[i].insertBefore(target, targets[i].childNodes[0]);
 
       var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu');
-      item.setAttribute('data-contents-url', '/notwaldorf/fuckery/issues/1/show_partial?partial=issues%2Fsidebar%2Flabels_menu_content')
       target.appendChild(item);
 
       var button = createButton();
@@ -99,8 +98,8 @@
     var filter = createNodeWithClass('div', 'select-menu-filters');
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
     var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable');
-    filterInput.id = 'canned-answer-filter-field';
-    filterInput.placeholder = 'Filter answers';
+    filterInput.id = 'canned-response-filter-field';
+    filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
     filterInput.setAttribute('aria-label', 'Type or choose an answer');
 
@@ -109,8 +108,8 @@
     main.appendChild(filter);
 
     var itemList = createNodeWithClass('div', 'select-menu-list');
-    itemList.setAttribute('date-filterable-for', 'canned-answer-filter-field');
-    itemList.setAttribute('date-filterable-type', 'substring');
+    itemList.setAttribute('data-filterable-for', 'canned-response-filter-field');
+    itemList.setAttribute('data-filterable-type', 'fuzzy');
 
     main.appendChild(itemList);
 
@@ -126,7 +125,7 @@
   }
 
   function createDropdownItem(text) {
-    var item = createNodeWithClass('div', 'select-menu-item js-navigation-item navigation-focus');
+    var item = createNodeWithClass('div', 'select-menu-item js-navigation-item navigation-focus last-visible ');
     item.textContent = text;
     return item;
   }
@@ -137,6 +136,7 @@
     textarea.value += item.answer + '\n';
 
     // Scroll down.
+    textarea.focus();
     textarea.scrollTop = textarea.scrollHeight;
   }
 })();
