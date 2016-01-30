@@ -44,7 +44,7 @@
   // and whenever we push/pop new pages.
   window.addEventListener("message", function(event) {
     if (event.data === 'extension:pageUpdated') {
-      load();
+      addAnswerButton();
     }
   });
 
@@ -76,18 +76,20 @@
     }
 
     // If there's already a button nuke it so we can start fresh.
-    var b = document.querySelector('.github-canned-response-item');
-    if (b) {
-      b.parentNode.removeChild(b);
+    var existingButtons = document.querySelectorAll('.github-canned-response-item');
+    if (existingButtons && existingButtons.length !== 0) {
+      for (var i = 0; i < existingButtons.length; i++) {
+        existingButtons[i].parentNode.removeChild(existingButtons[i]);
+      }
     }
 
     var targets = document.querySelectorAll('.js-toolbar.toolbar-commenting');
 
     for (var i = 0; i < targets.length; i++) {
-      var target = createNodeWithClass('div', 'toolbar-group');
+      var target = createNodeWithClass('div', 'toolbar-group github-canned-response-item');
       targets[i].insertBefore(target, targets[i].childNodes[0]);
 
-      var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu github-canned-response-item');
+      var item = createNodeWithClass('div', 'select-menu js-menu-container js-select-menu label-select-menu');
       target.appendChild(item);
 
       var button = createButton();
