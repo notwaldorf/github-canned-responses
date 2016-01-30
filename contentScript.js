@@ -34,9 +34,6 @@
       return;
     }
 
-    var b1 = document.querySelector('.form-actions').querySelector('button');
-    var i = document.createElement('input');
-
     var targets = document.querySelectorAll('.js-toolbar.toolbar-commenting');
 
     for (var i = 0; i < targets.length; i++) {
@@ -99,6 +96,7 @@
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
     var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable form-control');
     filterInput.id = 'canned-response-filter-field';
+    filterInput.type = 'text';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
     filterInput.setAttribute('aria-label', 'Type or choose an answer');
@@ -119,6 +117,14 @@
       item.toolbar = toolbar;
       item.answer = answers[i].description;
       item.addEventListener('click', insertAnswer);
+
+      // Gigantic hack because the PR page is not setting up mouse events correctly.
+      item.addEventListener('mouseenter', function() {
+        this.className += ' navigation-focus';
+      });
+      item.addEventListener('mouseleave', function() {
+        this.className = this.className.replace(/ navigation-focus/g, '');
+      });
     }
 
     return outer;
