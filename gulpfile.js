@@ -20,8 +20,7 @@ gulp.task('default', function () {
   manifest = manifest.pipe(jeditor({
     'applications': {
       'gecko': {
-        'id': 'github-canned-responses@example',
-        'strict_min_version': '43.0.0'
+        'id': 'github-canned-responses@example'
       }
     }
   }));
