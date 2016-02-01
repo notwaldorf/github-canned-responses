@@ -122,8 +122,8 @@
     //button.appendChild(span);
     var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('class', 'octicon octicon-mail-read');
-    svg.style.height = 18;
-    svg.style.width = 16;
+    svg.style.height = '18px';
+    svg.style.width = '16px';
     svg.setAttribute('viewBox', '0 0 18 16');
 
     var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
