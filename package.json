@@ -1,6 +1,6 @@
 {
   "name": "github-canned-responses",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Choose from a set of canned responses when commenting on your GitHub PRs or issues",
   "main": "background.js",
   "dependencies": {
