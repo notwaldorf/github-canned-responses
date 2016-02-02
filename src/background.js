@@ -45,13 +45,18 @@ function getAnswersListFromStorage() {
   } else {
    answers = JSON.parse(localStorage.getItem(localStorageKey));
   }
-
   return answers;
 }
 
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  if (message === 'load') {
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+  if (request.action === 'load') {
     var answers = getAnswersListFromStorage();
     sendResponse({'answers': answers});
+  }
+  if (request.action === 'save') {
+    // Save the answers to local storage.
+    var localStorageKey = '__GH_CANNED_ANSWERS__EXT__';
+    localStorage.setItem(localStorageKey, JSON.stringify(request.answers));
+    sendResponse();
   }
 });

@@ -1,0 +1,125 @@
+.gcr-ext-editor-dialog {
+  box-sizing: border-box;
+  position: fixed;
+  width: 800px;
+  height: 600px;
+  top: calc(50% - 300px);
+  left: calc(50% - 400px);
+  z-index: 1000;
+  background: #fff;
+  border-radius: 3px;
+  overflow: hidden;
+
+  /* GitHub modal popup styles */
+  color: #666;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(200,200,200,0.4);
+  border-radius: 3px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+}
+
+.gcr-ext-editor-uppercase { text-transform: uppercase; }
+.gcr-ext-editor-wide { letter-spacing: 1px; }
+.gcr-ext-editor-thin { font-weight: 300; }
+
+.gcr-ext-editor-list ul { padding: 0; list-style-type: none; }
+.gcr-ext-editor-list li { margin-bottom: 30px; }
+
+.gcr-ext-editor-close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 30px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+  z-index: 1;
+}
+.gcr-ext-editor-dialog-inner {
+  margin-top: 30px;
+  position: absolute;
+  overflow: scroll;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.gcr-ext-editor-header {
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.gcr-ext-editor-list {
+  max-width: 700px;
+  margin: 20px auto;
+}
+
+.gcr-ext-editor-horizontal {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  max-width: 700px;
+  margin: 0px auto;
+  padding: 30px 0 10px 0;
+}
+
+.gcr-ext-editor-answer-title {
+  color: #2D243B;
+  font-weight: 300;
+  font-size: 24px;
+  margin-bottom: 0px;
+  word-wrap: break-word;
+}
+
+.gcr-ext-editor-answer-text {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.6;
+}
+
+.gcr-ext-editor-horizontal textarea,
+.gcr-ext-editor-horizontal input,
+.gcr-ext-editor-list textarea,
+.gcr-ext-editor-list input {
+  display: block;
+  width: 100%;
+  position: relative;
+  -webkit-appearance: none;
+  border: 1px solid #ccc;
+  padding: 2px 5px;
+}
+
+.gcr-ext-editor-list textarea[disabled],
+.gcr-ext-editor-list input[disabled] {
+  border: none;
+  resize: none;
+  box-shadow: none;
+  padding: 3px 6px;
+  background: transparent;
+}
+
+.gcr-ext-editor-horizontal textarea,
+.gcr-ext-editor-list textarea {
+  margin: 10px 0;
+  font-family: inherit;
+}
+
+.gcr-ext-editor-answer-half {
+  width: 400px !important;
+  margin-right: 20px;
+}
+
+.gcr-ext-editor-status-message {
+  font-size: 14px;
+  color: #bd2c00;
+  padding-left: 10px;
+}
+
+.gcr-ext-editor-del {
+  margin-left: 20px;
+}

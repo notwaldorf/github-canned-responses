@@ -4,71 +4,14 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <title>Canned response settings</title>
   <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link href='options.css' rel='stylesheet' type='text/css'>
   <style>
     body {
       font-family: 'Lato';
       font-size: 14px;
-      background: #eee;
+      background: white;
       margin: 0;
       padding: 0;
-    }
-    .uppercase { text-transform: uppercase; }
-    .wide { letter-spacing: 1px; }
-    .thin { font-weight: 300; }
-    .heavy { font-weight: bold; }
-    .line {
-      background: #E91E63;
-      height: 10px;
-    }
-    ul { padding: 0; list-style-type: none; }
-    li { margin-bottom: 30px; }
-
-    .header {
-      background: #e1e1e1;
-      border-bottom: 1px solid #c1c1c1;
-    }
-
-    .footer {
-      background: #E91E63;
-      padding: 5px;
-      margin: 0 auto;
-      color: white;
-      text-align: center;
-      font-size: 12px;
-    }
-
-    .footer a:link, .footer a:visited, .footer a:hover {
-      color: white;
-    }
-    .list {
-      max-width: 700px;
-      margin: 50px auto;
-    }
-
-    .horizontal {
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -ms-flex-direction: row;
-      -webkit-flex-direction: row;
-      flex-direction: row;
-      max-width: 700px;
-      margin: 0px auto;
-      padding: 30px 0 10px 0;
-    }
-
-    .answer-title {
-      color: #2D243B;
-      font-size: 30px;
-      font-weight: 700;
-      margin-bottom: 0px;
-      word-wrap: break-word;
-    }
-
-    .answer-text {
-      font-size: 19px;
-      color: #666;
-      line-height: 1.6;
     }
 
     button {
@@ -93,82 +36,62 @@
       background: #C51162;
     }
 
-    textarea, input {
-      display: block;
-      width: 100%;
-      position: relative;
-      -webkit-appearance: none;
-      border: 1px solid #ccc;
-      padding: 2px 5px;
+
+    .gcr-ext-editor-footer {
+      background: #f5f5f5;
+      text-align: center;
+      color: black;
+      font-size: 14px;
+      padding: 2px;
+      margin: 0 auto;
     }
 
-    textarea[disabled], input[disabled] {
-      border: none;
-      resize: none;
-      padding: 3px 6px;
-      background: transparent;
+    .gcr-ext-editor-footer a:link,
+    .gcr-ext-editor-footer a:visited,
+    .gcr-ext-editor-footer a:hover {
+      color: #E91E63;
     }
 
-    textarea {
-      margin: 10px 0;
-      font-family: inherit;
-    }
-
-    .half {
-      width: 400px;
-      margin-right: 20px;
-    }
-
-    .pink {
+    .gcr-ext-editor-pink {
       font-weight: bold;
       color: #E91E63;
     }
 
-    .status-message {
-      font-size: 14px;
+    .gcr-ext-editor-status-message {
       color: #E91E63;
-      padding-left: 10px;
-    }
-
-    .del {
-      margin-left: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="line"></div>
-
-  <div class="header">
-    <div class="horizontal">
+  <div class="gcr-ext-editor-header">
+    <div class="gcr-ext-editor-horizontal">
       <div>
-        <input id="newTitle" class="answer-title half" placeholder="You go get 'em tiger!">
-        <textarea id="newText" class="answer-text half" style="height: 100px" placeholder="You're the best! Also, we're closing this PR because it's written wrong, but <333"></textarea>
+        <input id="gcrExtNewTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get 'em tiger!">
+        <textarea id="gcrExtNewText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You're the best! Also, we're closing this PR because it's written wrong, but <333"></textarea>
       </div>
       <div>
-        <div class="answer-text" style="font-size: 14px"><span class="pink">⇠</span>
-          This is an easy title to remember this canned response by.</div><br>
-        <div class="answer-text" style="font-size: 14px"><span class="pink">⇠</span>
+        <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span>
+          This is an easy title to remember this canned response by</div><br>
+        <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span>
           And this is the actual content that will be inserted</div><br>
-        <button id="new">Can it!</button>
-        <span id="newError" class="status-message" hidden>No empty canned answers!</span>
-        <span id="newConfirm" class="status-message" hidden>Added!</span>
+        <button id="gcrExtNewButton">Can it!</button>
+        <span id="gcrExtNewError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span>
+        <span id="gcrExtNewConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span>
       </div>
     </div>
   </div>
-
-  <div class="list">
-    <ul id="answerList"></ul>
+  <div class="gcr-ext-editor-list">
+    <ul id="gcrExtAnswerList"></ul>
   </div>
-
-  <div class="footer">
-    <p class="uppercase wide thin">made with ❤︎ by
+  <div class="gcr-ext-editor-footer">
+    <p class="gcr-ext-editor-uppercase gcr-ext-editor-wide gcr-ext-editor-thin">made with <span class="gcr-ext-editor-pink">❤︎</span> by
       <a href="https://twitter.com/notwaldorf">monica</a>.
       find this on <a href="https://github.com/notwaldorf/github-canned-responses">github</a></p>
-
   </div>
 
   <!-- Loads the existing answers from localStorage -->
   <script src="background.js"></script>
+  <script src="editor.js"></script>
   <script src="options.js"></script>
 
 </body>

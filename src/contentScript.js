@@ -1,6 +1,7 @@
+var __gcrExtAnswers;
+
 (function() {
   "use strict";
-  var answers;
 
   // This following code is taken from
   // https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
@@ -54,8 +55,8 @@
   // End of code from https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
 
   function load() {
-    chrome.runtime.sendMessage('load', function(response) {
-      answers = response.answers;
+    chrome.runtime.sendMessage({action: 'load'}, function(response) {
+      __gcrExtAnswers = response.answers;
       addAnswerButton();
     });
   }
@@ -96,7 +97,7 @@
       item.appendChild(button);
 
       if (targets[i]) {
-        var dropdown = createDropdown(answers, targets[i]);
+        var dropdown = createDropdown(__gcrExtAnswers, targets[i]);
         item.appendChild(dropdown);
       }
     }
@@ -114,22 +115,8 @@
     button.setAttribute('aria-label', 'Insert canned response');
     button.style.display = 'inline-block';
 
-    //var text = document.createTextNode('Canned Response');
-    //button.appendChild(text);
-
-    // Github just shipped svg icons, so this doesn't work anymore.
-    //var span = createNodeWithClass('span', 'octicon octicon-mail-read');
-    //button.appendChild(span);
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'octicon octicon-mail-read');
-    svg.style.height = '18px';
-    svg.style.width = '16px';
-    svg.setAttribute('viewBox', '0 0 18 16');
-
-    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttributeNS(null, 'd', "M6 5H4v-1h2v1z m3 1H4v1h5v-1z m5-0.48v8.48c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V5.52c0-0.33 0.16-0.63 0.42-0.81l1.58-1.13v-0.58c0-0.55 0.45-1 1-1h1.2L7 0l2.8 2h1.2c0.55 0 1 0.45 1 1v0.58l1.58 1.13c0.27 0.19 0.42 0.48 0.42 0.81zM3 7.5l4 2.5 4-2.5V3H3v4.5zM1 13.5l4.5-3L1 7.5v6z m11 0.5L7 11 2 14h10z m1-6.5L8.5 10.5l4.5 3V7.5z");
-    svg.appendChild(path);
-
+    // Github just shipped svg icons!
+    var svg = createSVG(18, 16, 'octicon-mail-read', "M6 5H4v-1h2v1z m3 1H4v1h5v-1z m5-0.48v8.48c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V5.52c0-0.33 0.16-0.63 0.42-0.81l1.58-1.13v-0.58c0-0.55 0.45-1 1-1h1.2L7 0l2.8 2h1.2c0.55 0 1 0.45 1 1v0.58l1.58 1.13c0.27 0.19 0.42 0.48 0.42 0.81zM3 7.5l4 2.5 4-2.5V3H3v4.5zM1 13.5l4.5-3L1 7.5v6z m11 0.5L7 11 2 14h10z m1-6.5L8.5 10.5l4.5 3V7.5z");
     button.appendChild(svg);
     var span = createNodeWithClass('span', 'dropdown-caret');
     button.appendChild(span);
@@ -143,10 +130,24 @@
     var inner = createNodeWithClass('div', 'select-menu-modal');
     outer.appendChild(inner);
 
+    // I hate the DOM.
     var header = createNodeWithClass('div', 'select-menu-header');
-    var headerText = createNodeWithClass('span', 'select-menu-title');
-    headerText.innerHTML = 'Insert response';
-    header.appendChild(headerText);
+    var headerSpan = createNodeWithClass('span', 'select-menu-title');
+    var spanText = document.createElement('text');
+    spanText.innerHTML = 'Canned responses ';
+
+    var editLink = createNodeWithClass('a', 'github-canned-response-edit');
+    editLink.innerHTML = '(edit or add new)';
+    editLink.style.cursor = 'pointer';
+    editLink.addEventListener('click', showEditView);
+
+    headerSpan.appendChild(spanText);
+    headerSpan.appendChild(editLink);
+
+    var svg = createSVG(16, 14, 'octicon-gear','M14 8.77V7.17l-1.94-0.64-0.45-1.09 0.88-1.84-1.13-1.13-1.81 0.91-1.09-0.45-0.69-1.92H6.17l-0.63 1.94-1.11 0.45-1.84-0.88-1.13 1.13 0.91 1.81-0.45 1.09L0 7.23v1.59l1.94 0.64 0.45 1.09-0.88 1.84 1.13 1.13 1.81-0.91 1.09 0.45 0.69 1.92h1.59l0.63-1.94 1.11-0.45 1.84 0.88 1.13-1.13-0.92-1.81 0.47-1.09 1.92-0.69zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z');
+    headerSpan.appendChild(svg);
+
+    header.appendChild(headerSpan);
     inner.appendChild(header);
 
     var main = createNodeWithClass('div', 'js-select-menu-deferred-content');
@@ -155,18 +156,18 @@
     var filter = createNodeWithClass('div', 'select-menu-filters');
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
     var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable form-control');
-    filterInput.id = 'canned-response-filter-field';
+    filterInput.id = 'gcr-ext-filter-field';
     filterInput.type = 'text';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
-    filterInput.setAttribute('aria-label', 'Type or choose an answer');
+    filterInput.setAttribute('aria-label', 'Type or choose a response');
 
     filterText.appendChild(filterInput);
     filter.appendChild(filterText);
     main.appendChild(filter);
 
     var itemList = createNodeWithClass('div', 'select-menu-list');
-    itemList.setAttribute('data-filterable-for', 'canned-response-filter-field');
+    itemList.setAttribute('data-filterable-for', 'gcr-ext-filter-field');
     itemList.setAttribute('data-filterable-type', 'fuzzy');
 
     main.appendChild(itemList);
@@ -196,6 +197,20 @@
     return item;
   }
 
+  function createSVG(height, width, octiconName, octiconPath) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'octicon ' + octiconName);
+    svg.style.height = height + 'px';
+    svg.style.width = width + 'px';
+    svg.setAttribute('viewBox', '0 0 ' + height + ' ' + width);
+
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', octiconPath);
+    svg.appendChild(path);
+
+    return svg;
+  }
+
   function insertAnswer(event) {
     var item = event.target;
     var textarea = item.toolbar.parentNode.parentNode.querySelector('textarea');
@@ -204,5 +219,47 @@
     // Scroll down.
     textarea.focus();
     textarea.scrollTop = textarea.scrollHeight;
+  }
+
+  function showEditView() {
+
+    var dialog = createNodeWithClass('div', 'gcr-ext-editor-dialog');
+    dialog.id = 'gcr-ext-editor';
+
+    // lol. This is from options.html.
+    // TODO: Replace this with ES6 civilized strings when you're less scared
+    // about breaking everything.
+    dialog.innerHTML = '<div class="gcr-ext-editor-close"></div><div class="gcr-ext-editor-dialog-inner"><div class="gcr-ext-editor-header"> <div class="gcr-ext-editor-horizontal"> <div> <input id="gcrExtNewTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get \'em tiger!"> <textarea id="gcrExtNewText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You\'re the best! Also, we\'re closing this PR because it\'s written wrong, but <333"></textarea> </div> <div> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> This is an easy title to remember this canned response by</div><br> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> And this is the actual content that will be inserted</div><br> <button id="gcrExtNewButton" class="btn btn-sm btn-primary">Can it!</button> <span id="gcrExtNewError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span> <span id="gcrExtNewConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span> </div> </div> </div> <div class="gcr-ext-editor-list"> <ul id="gcrExtAnswerList"></ul> </div></div>';
+
+    var closeBar = dialog.querySelector('.gcr-ext-editor-close');
+
+    var closeText = createNodeWithClass('span', 'select-menu-title');
+    closeText.innerHTML = 'Edit or add canned responses';
+    closeText.style.float = 'left';
+    closeText.style.padding = '5px 10px';
+    closeText.style.color = 'black';
+    closeText.style.fontWeight = 'bold';
+
+    var closeButton = createNodeWithClass('button', 'btn-link delete-button');
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.float = 'right';
+    var svg = createSVG(16, 16, 'octicon-x', 'M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z');
+    closeButton.appendChild(svg);
+    closeButton.addEventListener('click', function() {
+      document.body.removeChild(dialog);
+    });
+
+    closeBar.appendChild(closeText);
+    closeBar.appendChild(closeButton);
+    document.body.appendChild(dialog);
+
+    window.gcrExtEditorSaveAnswers = function() {
+      chrome.runtime.sendMessage({action: 'save', answers:__gcrExtAnswers}, function(response) {
+        addAnswerButton();
+      });
+    };
+
+    gcrExtEditorSetup();
+    gcrExtEditorUpdateAnswersList();
   }
 })();
