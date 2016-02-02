@@ -114,22 +114,8 @@
     button.setAttribute('aria-label', 'Insert canned response');
     button.style.display = 'inline-block';
 
-    //var text = document.createTextNode('Canned Response');
-    //button.appendChild(text);
-
-    // Github just shipped svg icons, so this doesn't work anymore.
-    //var span = createNodeWithClass('span', 'octicon octicon-mail-read');
-    //button.appendChild(span);
-    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'octicon octicon-mail-read');
-    svg.style.height = '18px';
-    svg.style.width = '16px';
-    svg.setAttribute('viewBox', '0 0 18 16');
-
-    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttributeNS(null, 'd', "M6 5H4v-1h2v1z m3 1H4v1h5v-1z m5-0.48v8.48c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V5.52c0-0.33 0.16-0.63 0.42-0.81l1.58-1.13v-0.58c0-0.55 0.45-1 1-1h1.2L7 0l2.8 2h1.2c0.55 0 1 0.45 1 1v0.58l1.58 1.13c0.27 0.19 0.42 0.48 0.42 0.81zM3 7.5l4 2.5 4-2.5V3H3v4.5zM1 13.5l4.5-3L1 7.5v6z m11 0.5L7 11 2 14h10z m1-6.5L8.5 10.5l4.5 3V7.5z");
-    svg.appendChild(path);
-
+    // Github just shipped svg icons!
+    var svg = createSVG(18, 16, 'octicon-mail-read', "M6 5H4v-1h2v1z m3 1H4v1h5v-1z m5-0.48v8.48c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V5.52c0-0.33 0.16-0.63 0.42-0.81l1.58-1.13v-0.58c0-0.55 0.45-1 1-1h1.2L7 0l2.8 2h1.2c0.55 0 1 0.45 1 1v0.58l1.58 1.13c0.27 0.19 0.42 0.48 0.42 0.81zM3 7.5l4 2.5 4-2.5V3H3v4.5zM1 13.5l4.5-3L1 7.5v6z m11 0.5L7 11 2 14h10z m1-6.5L8.5 10.5l4.5 3V7.5z");
     button.appendChild(svg);
     var span = createNodeWithClass('span', 'dropdown-caret');
     button.appendChild(span);
@@ -143,10 +129,24 @@
     var inner = createNodeWithClass('div', 'select-menu-modal');
     outer.appendChild(inner);
 
+    // I hate the DOM.
     var header = createNodeWithClass('div', 'select-menu-header');
-    var headerText = createNodeWithClass('span', 'select-menu-title');
-    headerText.innerHTML = 'Insert response';
-    header.appendChild(headerText);
+    var headerSpan = createNodeWithClass('span', 'select-menu-title');
+    var spanText = document.createElement('text');
+    spanText.innerHTML = 'Canned responses ';
+
+    var editLink = createNodeWithClass('a', 'github-canned-response-edit');
+    editLink.innerHTML = '(edit or add new)';
+    editLink.style.cursor = 'pointer';
+    editLink.addEventListener('click', showEditView);
+
+    headerSpan.appendChild(spanText);
+    headerSpan.appendChild(editLink);
+
+    var svg = createSVG(16, 14, 'octicon-gear','M14 8.77V7.17l-1.94-0.64-0.45-1.09 0.88-1.84-1.13-1.13-1.81 0.91-1.09-0.45-0.69-1.92H6.17l-0.63 1.94-1.11 0.45-1.84-0.88-1.13 1.13 0.91 1.81-0.45 1.09L0 7.23v1.59l1.94 0.64 0.45 1.09-0.88 1.84 1.13 1.13 1.81-0.91 1.09 0.45 0.69 1.92h1.59l0.63-1.94 1.11-0.45 1.84 0.88 1.13-1.13-0.92-1.81 0.47-1.09 1.92-0.69zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z');
+    headerSpan.appendChild(svg);
+
+    header.appendChild(headerSpan);
     inner.appendChild(header);
 
     var main = createNodeWithClass('div', 'js-select-menu-deferred-content');
@@ -159,7 +159,7 @@
     filterInput.type = 'text';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
-    filterInput.setAttribute('aria-label', 'Type or choose an answer');
+    filterInput.setAttribute('aria-label', 'Type or choose a response');
 
     filterText.appendChild(filterInput);
     filter.appendChild(filterText);
@@ -196,6 +196,20 @@
     return item;
   }
 
+  function createSVG(height, width, octiconName, octiconPath) {
+    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('class', 'octicon ' + octiconName);
+    svg.style.height = height + 'px';
+    svg.style.width = width + 'px';
+    svg.setAttribute('viewBox', '0 0 ' + height + ' ' + width);
+
+    var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttributeNS(null, 'd', octiconPath);
+    svg.appendChild(path);
+
+    return svg;
+  }
+
   function insertAnswer(event) {
     var item = event.target;
     var textarea = item.toolbar.parentNode.parentNode.querySelector('textarea');
@@ -204,5 +218,9 @@
     // Scroll down.
     textarea.focus();
     textarea.scrollTop = textarea.scrollHeight;
+  }
+
+  function showEditView() {
+    alert('ok!');
   }
 })();
