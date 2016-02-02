@@ -8,7 +8,7 @@
   z-index: 1000;
   background: #fff;
   border-radius: 3px;
-  overflow: auto;
+  overflow: hidden;
 
   /* GitHub modal popup styles */
   color: #666;
@@ -25,6 +25,26 @@
 
 .gcr-ext-editor-list ul { padding: 0; list-style-type: none; }
 .gcr-ext-editor-list li { margin-bottom: 30px; }
+
+.gcr-ext-editor-close {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 30px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #e5e5e5;
+  z-index: 1;
+}
+.gcr-ext-editor-dialog-inner {
+  margin-top: 30px;
+  position: absolute;
+  overflow: scroll;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
 
 .gcr-ext-editor-header {
   background: #f5f5f5;
