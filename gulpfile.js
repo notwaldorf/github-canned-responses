@@ -11,7 +11,7 @@ var zipName = 'github-canned-responses.zip';
 gulp.task('default', function () {
   var files = ['src/*', '!src/manifest.json'];
   var manifest = gulp.src('src/manifest.json');
-  var dest = gulp.dest('dest/');
+  var dest = gulp.dest('bin/');
 
   merge(gulp.src(files), manifest)
     .pipe(zip(zipName))
