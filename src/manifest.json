@@ -12,9 +12,8 @@
   "options_page": "options.html",
   "content_scripts": [
     {
-      "js": [
-        "contentScript.js"
-      ],
+      "js": ["editor.js", "contentScript.js"],
+      "css": ["options.css"],
       "matches": ["*://github.com/*"]
     }
   ],

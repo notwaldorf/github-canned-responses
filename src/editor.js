@@ -1,0 +1,103 @@
+function updateAnswersList() {
+  list.innerHTML = '';
+  for (var i = 0; i < __gcrExtAnswers.length; i++ ) {
+    var li = createItem(__gcrExtAnswers[i].name, __gcrExtAnswers[i].description);
+    li.answerId = i;
+    list.appendChild(li);
+  }
+}
+
+document.querySelector('#new').addEventListener('click', function(event) {
+  var name = document.getElementById('newTitle').value;
+  var text = document.getElementById('newText').value;
+
+  if (name.trim() === '' || text.trim() === '') {
+    document.querySelector('#newConfirm').hidden = true;
+    document.querySelector('#newError').hidden = false;
+    return;
+  }
+
+  document.querySelector('#newConfirm').hidden = true;
+  document.querySelector('#newError').hidden = true;
+
+  var answerId = __gcrExtAnswers.length;
+  __gcrExtAnswers.push({name: name, description: text});
+
+  // Save to local storage.
+  saveAnswers();
+
+  // Add to the UI list.
+  var li = createItem(name, text);
+  li.answerId = answerId;
+  list.appendChild(li);
+
+  document.querySelector('#newConfirm').hidden = false;
+  document.getElementById('newTitle').value = '';
+  document.getElementById('newText').value = '';
+
+  // Clear it after a bit.
+  setTimeout(function() {
+    document.querySelector('#newConfirm').hidden = true;
+  }, 2000);
+});
+
+document.querySelector('.gcr-ext-editor-list').addEventListener('click', function(event) {
+  if (event.target.tagName.toLowerCase() !== 'button')
+    return;
+
+  var button = event.target;
+  var item = button.parentNode;
+  var title = item.querySelector('.gcr-ext-editor-answer-title');
+  var text = item.querySelector('.gcr-ext-editor-answer-text');
+
+  // This is pretty lame.
+  if (button.textContent.toLowerCase() === 'edit') {
+    title.disabled = text.disabled = false;
+    button.textContent = 'Save';
+    title.focus();
+  } else if (button.textContent.toLowerCase() === 'save') {
+    title.disabled = text.disabled = true;
+    button.textContent = 'Edit';
+
+    // Save locally.
+    var answerId = item.answerId;
+    __gcrExtAnswers[item.answerId].name = title.value;
+    __gcrExtAnswers[item.answerId].description = text.value;
+
+    // Save to local storage.
+    saveAnswers(__gcrExtAnswers);
+  } else if (button.textContent.toLowerCase() === 'delete') {
+    __gcrExtAnswers.splice(item.answerId, 1);
+    // Save to local storage.
+    saveAnswers();
+    updateAnswersList();
+  }
+});
+
+function createItem(name, text) {
+  var li = document.createElement('li');
+
+  var title = document.createElement('input');
+  title.className = 'gcr-ext-editor-answer-title gcr-ext-editor-single-line';
+  title.value = name;
+  title.disabled = true;
+
+  var desc = document.createElement('textarea');
+  desc.className = 'gcr-ext-editor-answer-text';
+  desc.textContent = text;
+  desc.disabled = true;
+
+  var edit = document.createElement('button');
+  edit.className = 'gcr-ext-editor-edit';
+  edit.textContent = 'Edit';
+
+  var del = document.createElement('button');
+  del.className = 'gcr-ext-editor-del';
+  del.textContent = 'Delete';
+
+  li.appendChild(title);
+  li.appendChild(desc);
+  li.appendChild(edit);
+  li.appendChild(del);
+  return li;
+}
