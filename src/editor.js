@@ -8,20 +8,20 @@ function gcrExtEditorUpdateAnswersList() {
 }
 
 function gcrExtEditorSetup() {
-  list = document.getElementById('answerList');
+  list = document.getElementById('gcrExtAnswerList');
 
-  document.querySelector('#new').addEventListener('click', function(event) {
-    var name = document.getElementById('newTitle').value;
-    var text = document.getElementById('newText').value;
+  document.querySelector('#gcrExtNewButton').addEventListener('click', function(event) {
+    var name = document.getElementById('gcrExtNewTitle').value;
+    var text = document.getElementById('gcrExtNewText').value;
 
     if (name.trim() === '' || text.trim() === '') {
-      document.querySelector('#newConfirm').hidden = true;
-      document.querySelector('#newError').hidden = false;
+      document.querySelector('#gcrExtNewConfirm').hidden = true;
+      document.querySelector('#gcrExtNewError').hidden = false;
       return;
     }
 
-    document.querySelector('#newConfirm').hidden = true;
-    document.querySelector('#newError').hidden = true;
+    document.querySelector('#gcrExtNewConfirm').hidden = true;
+    document.querySelector('#gcrExtNewError').hidden = true;
 
     var answerId = __gcrExtAnswers.length;
     __gcrExtAnswers.push({name: name, description: text});
@@ -34,13 +34,13 @@ function gcrExtEditorSetup() {
     li.answerId = answerId;
     list.appendChild(li);
 
-    document.querySelector('#newConfirm').hidden = false;
-    document.getElementById('newTitle').value = '';
-    document.getElementById('newText').value = '';
+    document.querySelector('#gcrExtNewConfirm').hidden = false;
+    document.getElementById('gcrExtNewTitle').value = '';
+    document.getElementById('gcrExtNewText').value = '';
 
     // Clear it after a bit.
     setTimeout(function() {
-      document.querySelector('#newConfirm').hidden = true;
+      document.querySelector('#gcrExtNewConfirm').hidden = true;
     }, 2000);
   });
 
@@ -66,7 +66,7 @@ function gcrExtEditorSetup() {
       var answerId = item.answerId;
       __gcrExtAnswers[item.answerId].name = title.value;
       __gcrExtAnswers[item.answerId].description = text.value;
-      debugger
+
       // Save to local storage.
       gcrExtEditorSaveAnswers();
     } else if (button.textContent.toLowerCase() === 'delete') {
