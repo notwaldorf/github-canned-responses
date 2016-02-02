@@ -94,14 +94,9 @@
   margin-right: 20px;
 }
 
-.gcr-ext-editor-pink {
-  font-weight: bold;
-  color: #E91E63;
-}
-
 .gcr-ext-editor-status-message {
   font-size: 14px;
-  color: #E91E63;
+  color: #bd2c00;
   padding-left: 10px;
 }
 

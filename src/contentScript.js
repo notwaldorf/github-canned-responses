@@ -55,15 +55,9 @@ var __gcrExtAnswers;
   // End of code from https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
 
   function load() {
-    chrome.runtime.sendMessage('load', function(response) {
+    chrome.runtime.sendMessage({action: 'load'}, function(response) {
       __gcrExtAnswers = response.answers;
       addAnswerButton();
-    });
-  }
-
-  function save() {
-    chrome.runtime.sendMessage('save', 'bob', function(response) {
-      debugger
     });
   }
 
@@ -240,7 +234,10 @@ var __gcrExtAnswers;
     //dialog.appendChild(dialogTitle);
     document.body.appendChild(dialog);
 
-    window.gcrExtEditorSaveAnswers = save;
+    window.gcrExtEditorSaveAnswers = function() {
+      chrome.runtime.sendMessage({action: 'save', answers:__gcrExtAnswers}, function(response) {
+      });
+    };
 
     gcrExtEditorSetup();
     gcrExtEditorUpdateAnswersList();
