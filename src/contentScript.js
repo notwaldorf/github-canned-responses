@@ -76,8 +76,6 @@ var __gcrExtAnswers;
       return;
     }
 
-    document.addEventListener('selectmenu:selected', function(e) { console.log(e) });
-
     // If there's already a button nuke it so we can start fresh.
     var existingButtons = document.querySelectorAll('.github-canned-response-item');
     if (existingButtons && existingButtons.length !== 0) {
@@ -228,7 +226,9 @@ var __gcrExtAnswers;
     var dialog = createNodeWithClass('div', 'gcr-ext-editor-dialog');
     dialog.id = 'gcr-ext-editor';
 
-    // lol. This is from options.html
+    // lol. This is from options.html.
+    // TODO: Replace this with ES6 civilized strings when you're less scared
+    // about breaking everything.
     dialog.innerHTML = '<div class="gcr-ext-editor-close"></div><div class="gcr-ext-editor-dialog-inner"><div class="gcr-ext-editor-header"> <div class="gcr-ext-editor-horizontal"> <div> <input id="gcrExtNewTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get \'em tiger!"> <textarea id="gcrExtNewText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You\'re the best! Also, we\'re closing this PR because it\'s written wrong, but <333"></textarea> </div> <div> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> This is an easy title to remember this canned response by</div><br> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> And this is the actual content that will be inserted</div><br> <button id="gcrExtNewButton" class="btn btn-sm btn-primary">Can it!</button> <span id="gcrExtNewError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span> <span id="gcrExtNewConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span> </div> </div> </div> <div class="gcr-ext-editor-list"> <ul id="gcrExtAnswerList"></ul> </div></div>';
 
     var closeBar = dialog.querySelector('.gcr-ext-editor-close');
@@ -247,7 +247,7 @@ var __gcrExtAnswers;
     closeButton.appendChild(svg);
     closeButton.addEventListener('click', function() {
       document.body.removeChild(dialog);
-    })
+    });
 
     closeBar.appendChild(closeText);
     closeBar.appendChild(closeButton);
