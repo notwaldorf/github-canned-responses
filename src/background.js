@@ -45,13 +45,17 @@ function getAnswersListFromStorage() {
   } else {
    answers = JSON.parse(localStorage.getItem(localStorageKey));
   }
-
   return answers;
 }
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if (message === 'load') {
     var answers = getAnswersListFromStorage();
+    sendResponse({'answers': answers});
+  }
+  if (message === 'save') {
+    debugger
+    //var answers = getAnswersListFromStorage();
     sendResponse({'answers': answers});
   }
 });

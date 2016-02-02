@@ -9,15 +9,12 @@
     body {
       font-family: 'Lato';
       font-size: 14px;
-      background: #eee;
+      background: white;
       margin: 0;
       padding: 0;
     }
 
-
-    .gcr-ext-editor-horizontal button,
-    .gcr-ext-editor-del,
-    .gcr-ext-editor-edit {
+    button {
       font-size: 15px;
       font-weight: 300;
       border: none;
@@ -35,20 +32,28 @@
       margin-bottom: 15px;
     }
 
-    .gcr-ext-editor-horizontal button:hover,
-    .gcr-ext-editor-del:hover,
-    .gcr-ext-editor-edit:hover {
+    button:hover {
       background: #C51162;
     }
 
-    .gcr-ext-editor-line {
-      background: #E91E63;
-      height: 10px;
+
+    .gcr-ext-editor-footer {
+      background: #f5f5f5;
+      text-align: center;
+      color: black;
+      font-size: 14px;
+      padding: 2px;
+      margin: 0 auto;
+    }
+
+    .gcr-ext-editor-footer a:link,
+    .gcr-ext-editor-footer a:visited,
+    .gcr-ext-editor-footer a:hover {
+      color: #E91E63;
     }
   </style>
 </head>
 <body>
-  <div class="gcr-ext-editor-line"></div>
   <div class="gcr-ext-editor-header">
     <div class="gcr-ext-editor-horizontal">
       <div>
@@ -60,8 +65,8 @@
           This is an easy title to remember this canned response by.</div><br>
         <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span>
           And this is the actual content that will be inserted</div><br>
-        <button id="new" class="btn btn-sm btn-primary">Can it!</button>
-        <span id="newError" class="gcr-ext-editor-status-message" hidden>No empty canned answers!</span>
+        <button id="new">Can it!</button>
+        <span id="newError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span>
         <span id="newConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span>
       </div>
     </div>
@@ -70,7 +75,7 @@
     <ul id="answerList"></ul>
   </div>
   <div class="gcr-ext-editor-footer">
-    <p class="gcr-ext-editor-uppercase gcr-ext-editor-wide gcr-ext-editor-thin">made with ❤︎ by
+    <p class="gcr-ext-editor-uppercase gcr-ext-editor-wide gcr-ext-editor-thin">made with <span class="gcr-ext-editor-pink">❤︎</span> by
       <a href="https://twitter.com/notwaldorf">monica</a>.
       find this on <a href="https://github.com/notwaldorf/github-canned-responses">github</a></p>
   </div>

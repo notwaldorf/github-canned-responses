@@ -1,6 +1,7 @@
+var __gcrExtAnswers;
+
 (function() {
   "use strict";
-  var answers;
 
   // This following code is taken from
   // https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
@@ -55,8 +56,14 @@
 
   function load() {
     chrome.runtime.sendMessage('load', function(response) {
-      answers = response.answers;
+      __gcrExtAnswers = response.answers;
       addAnswerButton();
+    });
+  }
+
+  function save() {
+    chrome.runtime.sendMessage('save', 'bob', function(response) {
+      debugger
     });
   }
 
@@ -98,7 +105,7 @@
       item.appendChild(button);
 
       if (targets[i]) {
-        var dropdown = createDropdown(answers, targets[i]);
+        var dropdown = createDropdown(__gcrExtAnswers, targets[i]);
         item.appendChild(dropdown);
       }
     }
@@ -223,13 +230,19 @@
   }
 
   function showEditView() {
+
     var dialog = createNodeWithClass('div', 'gcr-ext-editor-dialog');
     dialog.id = 'gcr-ext-editor';
 
     // lol. This is from options.html
-    dialog.innerHTML = '<div class="gcr-ext-editor-header"> <div class="gcr-ext-editor-horizontal"> <div> <input id="newTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get \'em tiger!"> <textarea id="newText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You\'re the best! Also, we\'re closing this PR because it\'s written wrong, but <333"></textarea> </div> <div> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> This is an easy title to remember this canned response by.</div><br> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> And this is the actual content that will be inserted</div><br> <button id="new" class="btn btn-sm btn-primary">Can it!</button> <span id="newError" class="gcr-ext-editor-status-message" hidden>No empty canned answers!</span> <span id="newConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span> </div> </div> </div> <div class="gcr-ext-editor-list"> <ul id="answerList"></ul> </div> <div class="gcr-ext-editor-footer"> <p class="gcr-ext-editor-uppercase gcr-ext-editor-wide gcr-ext-editor-thin">made with ❤︎ by <a href="https://twitter.com/notwaldorf">monica</a>. find this on <a href="https://github.com/notwaldorf/github-canned-responses">github</a></p> </div>';
+    dialog.innerHTML = '<div class="gcr-ext-editor-header"> <div class="gcr-ext-editor-horizontal"> <div> <input id="newTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get \'em tiger!"> <textarea id="newText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You\'re the best! Also, we\'re closing this PR because it\'s written wrong, but <333"></textarea> </div> <div> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> This is an easy title to remember this canned response by.</div><br> <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span> And this is the actual content that will be inserted</div><br> <button id="new" class="btn btn-sm btn-primary">Can it!</button> <span id="newError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span> <span id="newConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span> </div> </div> </div> <div class="gcr-ext-editor-list"> <ul id="answerList"></ul> </div>';
 
     //dialog.appendChild(dialogTitle);
     document.body.appendChild(dialog);
+
+    window.gcrExtEditorSaveAnswers = save;
+
+    gcrExtEditorSetup();
+    gcrExtEditorUpdateAnswersList();
   }
 })();

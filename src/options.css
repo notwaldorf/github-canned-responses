@@ -2,12 +2,13 @@
   box-sizing: border-box;
   position: fixed;
   width: 800px;
-  height: 500px;
-  top: calc(50% - 250px);
+  height: 600px;
+  top: calc(50% - 300px);
   left: calc(50% - 400px);
   z-index: 1000;
   background: #fff;
   border-radius: 3px;
+  overflow: auto;
 
   /* GitHub modal popup styles */
   color: #666;
@@ -30,23 +31,9 @@
   border-bottom: 1px solid #e5e5e5;
 }
 
-.gcr-ext-editor-footer {
-  background: #E91E63;
-  padding: 5px;
-  margin: 0 auto;
-  color: white;
-  text-align: center;
-  font-size: 12px;
-}
-
-.gcr-ext-editor-footer a:link,
-.gcr-ext-editor-footer a:visited,
-.gcr-ext-editor-footer a:hover {
-  color: white;
-}
 .gcr-ext-editor-list {
   max-width: 700px;
-  margin: 50px auto;
+  margin: 20px auto;
 }
 
 .gcr-ext-editor-horizontal {
@@ -63,14 +50,14 @@
 
 .gcr-ext-editor-answer-title {
   color: #2D243B;
-  font-size: 30px;
-  font-weight: 700;
+  font-weight: 300;
+  font-size: 24px;
   margin-bottom: 0px;
   word-wrap: break-word;
 }
 
 .gcr-ext-editor-answer-text {
-  font-size: 19px;
+  font-size: 16px;
   color: #666;
   line-height: 1.6;
 }
@@ -91,6 +78,7 @@
 .gcr-ext-editor-list input[disabled] {
   border: none;
   resize: none;
+  box-shadow: none;
   padding: 3px 6px;
   background: transparent;
 }
