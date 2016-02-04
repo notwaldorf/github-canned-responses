@@ -14,8 +14,8 @@ comment editing view, that allows you to choose one of the existing canned respo
 <img width="600" alt="animated gif of the extension in action" src="https://cloud.githubusercontent.com/assets/1369170/12740248/487daebe-c926-11e5-8538-52ec4f2f8756.gif">
 
 ## Adding your own canned responses
-The extension comes with a few default canned responses, but you can edit them and add your own! In Chrome, go to `chrome://extensions`, scroll down until you find the extension, and click on the "Options" link. An inside-of-the-GitHub-editing-page version is coming soon. In the meantime, you'll get something that looks like this:
+The extension comes with a few default canned responses, but you can edit them and add your own! In the dropdown, press the edit link, and you'll get something like this:
 
-<img width="600" alt="screenshot of the answer editing page" src="https://cloud.githubusercontent.com/assets/1369170/12687433/c53c80e6-c684-11e5-8ec0-d915e5457ca2.png">
+<img width="600" alt="screenshot of the answer editing page" src="https://cloud.githubusercontent.com/assets/1369170/12832821/5cf4a168-cb51-11e5-861a-bdeb69f69549.png">
 
 ## Happy triaging, friends! <3
