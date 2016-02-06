@@ -155,7 +155,8 @@ var __gcrExtAnswers;
     var filter = createNodeWithClass('div', 'select-menu-filters');
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
     var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable form-control');
-    filterInput.id = 'gcr-ext-filter-field';
+    var uniqueID = toolbar.closest('form').querySelector('textarea').id
+    filterInput.id = 'gcr-ext-filter-field' + uniqueID;
     filterInput.type = 'text';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
@@ -166,7 +167,7 @@ var __gcrExtAnswers;
     main.appendChild(filter);
 
     var itemList = createNodeWithClass('div', 'select-menu-list');
-    itemList.setAttribute('data-filterable-for', 'gcr-ext-filter-field');
+    itemList.setAttribute('data-filterable-for', 'gcr-ext-filter-field' + uniqueID);
     itemList.setAttribute('data-filterable-type', 'fuzzy');
 
     main.appendChild(itemList);
