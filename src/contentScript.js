@@ -136,9 +136,8 @@ var __gcrExtAnswers;
     var spanText = document.createElement('text');
     spanText.innerHTML = 'Canned responses ';
 
-    var editLink = createNodeWithClass('a', 'github-canned-response-edit');
+    var editLink = createNodeWithClass('button', 'btn-link github-canned-response-edit');
     editLink.innerHTML = '(edit or add new)';
-    editLink.style.cursor = 'pointer';
     editLink.addEventListener('click', showEditView);
 
     headerSpan.appendChild(spanText);
