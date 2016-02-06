@@ -114,6 +114,7 @@ var __gcrExtAnswers;
 
     button.setAttribute('aria-label', 'Insert canned response');
     button.style.display = 'inline-block';
+    button.type = 'button';
 
     // Github just shipped svg icons!
     var svg = createSVG(18, 16, 'octicon-mail-read', "M6 5H4v-1h2v1z m3 1H4v1h5v-1z m5-0.48v8.48c0 0.55-0.45 1-1 1H1c-0.55 0-1-0.45-1-1V5.52c0-0.33 0.16-0.63 0.42-0.81l1.58-1.13v-0.58c0-0.55 0.45-1 1-1h1.2L7 0l2.8 2h1.2c0.55 0 1 0.45 1 1v0.58l1.58 1.13c0.27 0.19 0.42 0.48 0.42 0.81zM3 7.5l4 2.5 4-2.5V3H3v4.5zM1 13.5l4.5-3L1 7.5v6z m11 0.5L7 11 2 14h10z m1-6.5L8.5 10.5l4.5 3V7.5z");
@@ -136,17 +137,13 @@ var __gcrExtAnswers;
     var spanText = document.createElement('text');
     spanText.innerHTML = 'Canned responses ';
 
-    var editLink = createNodeWithClass('a', 'github-canned-response-edit');
-    editLink.innerHTML = '(edit or add new)';
-    editLink.style.cursor = 'pointer';
-    editLink.addEventListener('click', showEditView);
+    var editButton = createNodeWithClass('button', 'btn-link github-canned-response-edit');
+    editButton.type = 'button';
+    editButton.innerHTML = '(edit or add new)';
+    editButton.addEventListener('click', showEditView);
 
     headerSpan.appendChild(spanText);
-    headerSpan.appendChild(editLink);
-
-    var svg = createSVG(16, 14, 'octicon-gear','M14 8.77V7.17l-1.94-0.64-0.45-1.09 0.88-1.84-1.13-1.13-1.81 0.91-1.09-0.45-0.69-1.92H6.17l-0.63 1.94-1.11 0.45-1.84-0.88-1.13 1.13 0.91 1.81-0.45 1.09L0 7.23v1.59l1.94 0.64 0.45 1.09-0.88 1.84 1.13 1.13 1.81-0.91 1.09 0.45 0.69 1.92h1.59l0.63-1.94 1.11-0.45 1.84 0.88 1.13-1.13-0.92-1.81 0.47-1.09 1.92-0.69zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z');
-    headerSpan.appendChild(svg);
-
+    headerSpan.appendChild(editButton);
     header.appendChild(headerSpan);
     inner.appendChild(header);
 
@@ -156,7 +153,8 @@ var __gcrExtAnswers;
     var filter = createNodeWithClass('div', 'select-menu-filters');
     var filterText = createNodeWithClass('div', 'select-menu-text-filter');
     var filterInput = createNodeWithClass('input', 'js-filterable-field js-navigation-enable form-control');
-    filterInput.id = 'gcr-ext-filter-field';
+    var uniqueID = toolbar.closest('form').querySelector('textarea').id;
+    filterInput.id = 'gcr-ext-filter-field' + uniqueID;
     filterInput.type = 'text';
     filterInput.placeholder = 'Filter responses';
     filterInput.autocomplete = 'off';
@@ -167,7 +165,7 @@ var __gcrExtAnswers;
     main.appendChild(filter);
 
     var itemList = createNodeWithClass('div', 'select-menu-list');
-    itemList.setAttribute('data-filterable-for', 'gcr-ext-filter-field');
+    itemList.setAttribute('data-filterable-for', 'gcr-ext-filter-field' + uniqueID);
     itemList.setAttribute('data-filterable-type', 'fuzzy');
 
     main.appendChild(itemList);
@@ -241,6 +239,7 @@ var __gcrExtAnswers;
     closeText.style.fontWeight = 'bold';
 
     var closeButton = createNodeWithClass('button', 'btn-link delete-button');
+    closeButton.type = 'button';
     closeButton.style.padding = '5px 10px';
     closeButton.style.float = 'right';
     var svg = createSVG(16, 16, 'octicon-x', 'M7.48 8l3.75 3.75-1.48 1.48-3.75-3.75-3.75 3.75-1.48-1.48 3.75-3.75L0.77 4.25l1.48-1.48 3.75 3.75 3.75-3.75 1.48 1.48-3.75 3.75z');
