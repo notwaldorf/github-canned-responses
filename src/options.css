@@ -1,59 +1,28 @@
-.gcr-ext-editor-dialog {
-  box-sizing: border-box;
-  position: fixed;
-  width: 800px;
+.gcrdialog {
+  width: 760px !important;
   height: 600px;
-  top: calc(50% - 300px);
-  left: calc(50% - 400px);
-  z-index: 1000;
-  background: #fff;
-  border-radius: 3px;
-  overflow: hidden;
+  overflow: auto;
 
-  /* GitHub modal popup styles */
-  color: #666;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid rgba(200,200,200,0.4);
-  border-radius: 3px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+  /* Weird scroll bar position fix */
+  transform: translateZ(0);
 }
 
 .gcr-ext-editor-uppercase { text-transform: uppercase; }
 .gcr-ext-editor-wide { letter-spacing: 1px; }
 .gcr-ext-editor-thin { font-weight: 300; }
 
-.gcr-ext-editor-list ul { padding: 0; list-style-type: none; }
+.gcr-ext-editor-list ul { padding: 0; margin: 0 !important; list-style-type: none; }
 .gcr-ext-editor-list li { margin-bottom: 30px; }
 
-.gcr-ext-editor-close {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  height: 30px;
-  background: #f5f5f5;
-  border-bottom: 1px solid #e5e5e5;
-  z-index: 1;
-}
-.gcr-ext-editor-dialog-inner {
-  margin-top: 30px;
-  position: absolute;
-  overflow: scroll;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.gcr-ext-editor-list {
+  margin: 20px auto;
 }
 
 .gcr-ext-editor-header {
   background: #f5f5f5;
+  margin: -15px -15px 0;
   border-bottom: 1px solid #e5e5e5;
-}
-
-.gcr-ext-editor-list {
-  max-width: 700px;
-  margin: 20px auto;
+  padding: 15px;
 }
 
 .gcr-ext-editor-horizontal {
@@ -63,9 +32,6 @@
   -ms-flex-direction: row;
   -webkit-flex-direction: row;
   flex-direction: row;
-  max-width: 700px;
-  margin: 0px auto;
-  padding: 30px 0 10px 0;
 }
 
 .gcr-ext-editor-answer-title {
@@ -77,13 +43,13 @@
 }
 
 .gcr-ext-editor-answer-text {
-  font-size: 16px;
+  font-size: 14px;
+  margin-left: 20px;
   color: #666;
   line-height: 1.6;
 }
 
-.gcr-ext-editor-horizontal textarea,
-.gcr-ext-editor-horizontal input,
+.gcr-ext-editor-answer-input,
 .gcr-ext-editor-list textarea,
 .gcr-ext-editor-list input {
   display: block;
@@ -99,7 +65,7 @@
   border: none;
   resize: none;
   box-shadow: none;
-  padding: 3px 6px;
+  padding: 0;
   background: transparent;
 }
 
@@ -109,9 +75,13 @@
   font-family: inherit;
 }
 
-.gcr-ext-editor-answer-half {
-  width: 400px !important;
-  margin-right: 20px;
+.gcr-ext-editor-answer-input {
+  width: 400px;
+}
+
+textarea.gcr-ext-editor-answer-input {
+  font-size: 16px;
+  height: 105px;
 }
 
 .gcr-ext-editor-status-message {
@@ -122,4 +92,15 @@
 
 .gcr-ext-editor-del {
   margin-left: 20px;
+}
+
+.gcr-ext-options-page .gcr-ext-editor-header {
+  padding: 30px 20%;
+  margin: 0 auto 30px;
+}
+
+.gcr-ext-options-page .gcr-ext-editor-list,
+.gcr-ext-options-page .gcr-ext-editor-horizontal {
+  width: 700px;
+  margin: auto;
 }

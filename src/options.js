@@ -5,5 +5,4 @@ var gcrExtEditorSaveAnswers = function() {
   localStorage.setItem(localStorageKey, JSON.stringify(__gcrExtAnswers));
 }
 
-gcrExtEditorSetup();
 gcrExtEditorUpdateAnswersList();

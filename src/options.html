@@ -62,27 +62,32 @@
     }
   </style>
 </head>
-<body>
+<body id="gcr-ext-editor" class="gcr-ext-options-page">
   <div class="gcr-ext-editor-header">
     <div class="gcr-ext-editor-horizontal">
       <div>
-        <input id="gcrExtNewTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-half" placeholder="You go get 'em tiger!">
-        <textarea id="gcrExtNewText" class="gcr-ext-editor-answer-text gcr-ext-editor-answer-half" style="height: 100px" placeholder="You're the best! Also, we're closing this PR because it's written wrong, but <333"></textarea>
+        <input id="gcrExtNewTitle" class="gcr-ext-editor-answer-title gcr-ext-editor-answer-input" placeholder="You go get 'em tiger!">
+        <br>
+        <textarea id="gcrExtNewText" aria-label="Canned reply answer" class="gcr-ext-editor-answer-input" placeholder="You're the best! Also, we're closing this PR because it's written wrong, but <333"></textarea>
       </div>
       <div>
-        <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span>
-          This is an easy title to remember this canned response by</div><br>
-        <div class="gcr-ext-editor-answer-text" style="font-size: 14px"><span class="gcr-ext-editor-pink">⇠</span>
-          And this is the actual content that will be inserted</div><br>
-        <button id="gcrExtNewButton">Can it!</button>
-        <span id="gcrExtNewError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span>
-        <span id="gcrExtNewConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span>
+        <div class="gcr-ext-editor-answer-text">
+          <span class="gcr-ext-editor-pink">⇠</span> This is an easy title to remember this canned response by
+          <br><br>
+          <span class="gcr-ext-editor-pink">⇠</span> And this is the actual content that will be inserted
+          <br><br>
+          <button id="gcrExtNewButton">Can it!</button>
+          <span id="gcrExtNewError" class="gcr-ext-editor-status-message" hidden>No empty canned responses!</span>
+          <span id="gcrExtNewConfirm" class="gcr-ext-editor-status-message" hidden>Added!</span>
+        </div>
       </div>
     </div>
   </div>
+
   <div class="gcr-ext-editor-list">
-    <ul id="gcrExtAnswerList"></ul>
+    <ul class="gcr-ext-answer-list"></ul>
   </div>
+
   <div class="gcr-ext-editor-footer">
     <p class="gcr-ext-editor-uppercase gcr-ext-editor-wide gcr-ext-editor-thin">made with <span class="gcr-ext-editor-pink">❤︎</span> by
       <a href="https://twitter.com/notwaldorf">monica</a>.
