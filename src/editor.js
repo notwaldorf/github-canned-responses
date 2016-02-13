@@ -52,6 +52,7 @@ function gcrExtEditorSetup() {
     var item = button.parentNode;
     var title = item.querySelector('.gcr-ext-editor-answer-title');
     var text = item.querySelector('.gcr-ext-editor-answer-text');
+    var answerId = item.answerId;
 
     // This is pretty lame.
     if (button.textContent.toLowerCase() === 'edit') {
@@ -63,14 +64,13 @@ function gcrExtEditorSetup() {
       button.textContent = 'Edit';
 
       // Save locally.
-      var answerId = item.answerId;
-      __gcrExtAnswers[item.answerId].name = title.value;
-      __gcrExtAnswers[item.answerId].description = text.value;
+      __gcrExtAnswers[answerId].name = title.value;
+      __gcrExtAnswers[answerId].description = text.value;
 
       // Save to local storage.
       gcrExtEditorSaveAnswers();
     } else if (button.textContent.toLowerCase() === 'delete') {
-      __gcrExtAnswers.splice(item.answerId, 1);
+      __gcrExtAnswers.splice(answerId, 1);
       // Save to local storage.
       gcrExtEditorSaveAnswers();
       gcrExtEditorUpdateAnswersList();
