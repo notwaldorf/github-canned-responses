@@ -139,13 +139,14 @@ var __gcrExtAnswers;
     var spanText = document.createElement('text');
     spanText.innerHTML = 'Canned responses ';
 
-    var editLink = createNodeWithClass('a', 'github-canned-response-edit');
-    editLink.href = '#gcr-ext-editor';
-    editLink.setAttribute('rel', 'facebox[.gcrdialog]');
-    editLink.innerHTML = '(edit or add new)';
+    var editButton = createNodeWithClass('button', 'btn-link github-canned-response-edit');
+    editButton.type = 'button';
+    editButton.setAttribute('data-facebox', '#gcr-ext-editor');
+    editButton.setAttribute('data-facebox-class', 'gcrdialog');
+    editButton.innerHTML = '(edit or add new)';
 
     headerSpan.appendChild(spanText);
-    headerSpan.appendChild(editLink);
+    headerSpan.appendChild(editButton);
     header.appendChild(headerSpan);
     inner.appendChild(header);
 
