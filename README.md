@@ -1,6 +1,7 @@
-# github-canned-responses
+#🚨🚨🚨 This repo is unmaintained!
+Hai! Thanks for stopping by! Since GitHub shipped a similar feature for realsies, there's no real point for me to maintain this extension. I've had requests from a couple of people not to nuke this repo since they'd still like to use this, so feel free to continue using it. Or not. It's really up to you. Here's a cactus :cactus: 
 
-[Note: since GitHub shipped a similar feature for realsies, there's no real point for me to maintain this extension. I've had requests from a couple of people not to nuke this repo since they'd still like to use this, so feel free to continue using it. Or not. It's really up to you. Here's a cactus 🌵]
+# github-canned-responses
 
 Sometimes you've made mistakes and you have to triage 700 GitHub issues and Pull Requests. A lot of them will need the same answer, and your wrists will start hurting from all the switch-to-edit-copy-pasting. This extension helps with that.
 
