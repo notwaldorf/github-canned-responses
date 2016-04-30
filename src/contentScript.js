@@ -7,13 +7,13 @@ var __gcrExtAnswers;
   // https://github.com/thieman/github-selfies/blob/master/chrome/selfie.js
   var allowedPaths = [
     // New issues
-    /github.com\/[\w\-]+\/[\w\-]+\/issues\/new/,
+    /github.com\/[\w-.]+\/[\w-.]+\/issues\/new/,
     // Existing issues (comment)
-    /github.com\/[\w\-]+\/[\w\-]+\/issues\/\d+/,
+    /github.com\/[\w-.]+\/[\w-.]+\/issues\/\d+/,
     // New pull request
-    /github.com\/[\w\-]+\/[\w\-]+\/compare/,
+    /github.com\/[\w-.]+\/[\w-.]+\/compare/,
     // Existing pull requests (comment)
-    /github.com\/[\w\-]+\/[\w\-]+\/pull\/\d+/
+    /github.com\/[\w-.]+\/[\w-.]+\/pull\/\d+/
   ];
 
   // Inject the code from fn into the page, in an IIFE.
