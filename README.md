@@ -1,5 +1,5 @@
-#🚨🚨🚨 This repo is unmaintained!
-Hai! Thanks for stopping by! Since GitHub shipped a similar feature for realsies, there's no real point for me to maintain this extension. I've had requests from a couple of people not to nuke this repo since they'd still like to use this, so feel free to continue using it. Or not. It's really up to you. Here's a cactus :cactus: 
+# 🚨🚨🚨 This repo is unmaintained! 🚨🚨🚨
+Hai! Thanks for stopping by! Since GitHub shipped a similar feature for realsies, [Saved replies](https://help.github.com/articles/working-with-saved-replies/), there's no real point for me to maintain this extension. I've had requests from a couple of people not to nuke this repo since they'd still like to use this, so feel free to continue using it. Or not. It's really up to you. Here's a cactus :cactus: 
 
 # github-canned-responses
 
